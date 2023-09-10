@@ -1,5 +1,2 @@
-
-## Live project from Manning editions
-
-### Python and Kafka
-
+# python-and-kafka-lp-author
+Repository for liveProject: Python and Kafka
