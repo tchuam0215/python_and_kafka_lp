@@ -1,4 +1,4 @@
-#!/mnt/c/Users/tchua/Desktop/Freecodecamp/python_and_kafka_lp/env/bin/python3
+#!/mnt/c/Users/tchua/Desktop/Freecodecamp/python_and_kafka_lp/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

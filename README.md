@@ -4,6 +4,8 @@
 
 ## 1st Delivery 
 
+## Using python for the first time
+
 * Create the sample_project python project
 * Create a virtual environment 
 * Install poetry 
@@ -29,4 +31,32 @@ docker-compose exec -it kafka kafka-console-consumer.sh --consumer.config /opt/b
 >Then run the following command in the second CLI to receive messages  
 ```docker 
 docker-compose exec -it kafka kafka-console-producer.sh --producer.config /opt/bitnami/kafka/config/producer.properties --bootstrap-server 127.0.0.1:9094 --topic test
+```
+
+## 3rd Delivery 
+
+### Working with a Postgres Database
+
+The deliverable for this milestone is a docker-compose file consisting of three running containers: Kafka, Zookeeper, and Postgres
+When running :
+```docker
+docker-compose --file ./docker-compose.yml up --detach 
+```
+The service postgresql automaticaly restore the pagila database, you can then verify this database with the following commands :
+
+1. Log in to the postgresql database service   : 
+```docker
+docker-compose exec -it postgresql psql -U postgres
+```
+2. List the database :
+```sql
+postgres>\l
+```
+3. Connect to the database **pagila**
+```sql
+postgres>\connect pagila
+```
+4. You are free to run some queries : 
+```sql
+postgres>select * from actor limit 10;
 ```
