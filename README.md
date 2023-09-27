@@ -70,7 +70,7 @@ Objective
 * Remember, we can do this through the console using the docker-compose command.
 Create a Python program utilizing the Faust library to communicate with Kafka, proving the ability to produce and consume messages.
 
-NB : i have installed python 3.9.18, this version well form me with faust library without any dependency issues. 
+NB : i have installed python 3.9.18, this version worked well form me with faust library without any dependency issues. 
 
 1. First you need a hello_world.py, you can find this [Quickstart from faust official library](https://faust.readthedocs.io/en/latest/playbooks/quickstart.html#quickstart) :
 ```python
