@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "python-and-kafka-lp"
+version = "0.1.0"
+description = "Data pipeline through python and kafka project"
+authors = ["Tchuenkam Charles <ch.tchuenkam@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9.7"
+faust = "^1.10.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

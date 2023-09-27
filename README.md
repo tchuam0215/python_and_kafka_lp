@@ -60,3 +60,67 @@ postgres>\connect pagila
 ```sql
 postgres>select * from actor limit 10;
 ```
+
+# Observability project
+
+Objective
+
+* Kick off Kafka to start the data pipeline; in other words, what we did at the end of Project 1, Milestone 3.
+
+* Remember, we can do this through the console using the docker-compose command.
+Create a Python program utilizing the Faust library to communicate with Kafka, proving the ability to produce and consume messages.
+
+NB : i have installed python 3.9.18, this version well form me with faust library without any dependency issues. 
+
+1. First you need a hello_world.py, you can find this [Quickstart from faust official library](https://faust.readthedocs.io/en/latest/playbooks/quickstart.html#quickstart) :
+```python
+import faust
+
+app = faust.App(
+    'hello-world',
+    broker='kafka://localhost:9094',  # Point to the Kafka broker
+    value_serializer='raw',           # Use raw (unencoded) message format
+)
+
+greetings_topic = app.topic('greetings')
+
+@app.agent(greetings_topic)
+async def greet(greetings):
+    async for greeting in greetings:
+        print(f"Received: {greeting.decode('utf-8')}")
+
+if __name__ == '__main__':
+    app.main()
+```
+
+_NB : this code is enough to start._  
+
+2. Start Kafka using the you docker compose file (follow the step above)
+
+3. Run the faust worker : 
+
+Now that you have created a simple Faust application and have Kafka and Zookeeper running, you need to run a worker instance for the application.
+
+Multiple instances of a Faust worker can be started independently to distribute stream processing across machines and CPU cores.
+
+Start the worker :
+```bash
+poetry run faust -A hello_world worker -l info
+```
+Now that you worker is running, open a new terminal where you are going to produce messages, we are going to use 02 methods to send messages : 
+```bash
+# this is a one shot producer
+poetry run faust -A hello_world send @greet "Hello Faust"
+```
+or
+
+```bash 
+# this is a one shot producer 
+poetry run faust -A hello_world send greetings "Hello Kafka topic"
+```
+or
+
+```bash
+# you can send message continuously 
+docker-compose exec -it kafka kafka-console-producer.sh --producer.config /opt/bitnami/kafka/config/producer.properties --bootstrap-server 127.0.0.1:9094 --topic greetings
+```
